@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firewall Simulator | NetGuard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="container">
+    <nav class="page-nav">
+        <a href="/">Dashboard</a> | <a href="/scanner">Network Scanner</a> |
+        <a href="/history">Scan History</a> | <a href="/firewall">Firewall Simulator</a>
+    </nav>
+    <h1>Firewall Simulator</h1>
+    <p>Define priority-based rules and simulate how they handle network traffic.</p>
+    <div class="panel">
+        <h2>Add Firewall Rule</h2>
+        <form id="ruleForm">
+            <label for="ruleIP">IP Address</label>
+            <input type="text" id="ruleIP" placeholder="192.168.1.10 or ANY" value="ANY" required>
+            <label for="rulePort">Port</label>
+            <input type="text" id="rulePort" placeholder="80 or ANY" value="ANY" required>
+            <label for="ruleProtocol">Protocol</label>
+            <select id="ruleProtocol"><option value="TCP">TCP</option><option value="UDP">UDP</option><option value="ANY">ANY</option></select>
+            <label for="ruleAction">Action</label>
+            <select id="ruleAction"><option value="ALLOW">ALLOW</option><option value="DENY">DENY</option></select>
+            <label for="rulePriority">Priority (1 = highest)</label>
+            <input type="number" id="rulePriority" min="1" max="10000" value="100" required>
+            <button type="submit" class="primary-btn">Add Rule</button>
+        </form>
+        <p id="ruleMessage" class="message"></p>
+    </div>
+    <div class="panel">
+        <h2>Firewall Rules</h2>
+        <p class="muted">Rules are checked from the lowest priority number to the highest. If priorities are equal, the newest rule is checked first.</p>
+        <div class="table-wrapper">
+            <table><thead><tr><th>ID</th><th>Priority</th><th>IP</th><th>Port</th><th>Protocol</th><th>Action</th><th>Operation</th></tr></thead>
+            <tbody id="rulesTable"><tr><td colspan="7">Loading rules...</td></tr></tbody></table>
+        </div>
+    </div>
+    <div class="panel">
+        <h2>Traffic Simulator</h2>
+        <form id="trafficForm">
+            <label for="sourceIP">Source IP</label><input type="text" id="sourceIP" placeholder="192.168.1.10" required>
+            <label for="destinationIP">Destination IP</label><input type="text" id="destinationIP" placeholder="192.168.1.20" required>
+            <label for="trafficPort">Port</label><input type="number" id="trafficPort" min="1" max="65535" placeholder="80" required>
+            <label for="trafficProtocol">Protocol</label>
+            <select id="trafficProtocol"><option value="TCP">TCP</option><option value="UDP">UDP</option></select>
+            <button type="submit" class="primary-btn">Simulate Traffic</button>
+        </form>
+        <div id="trafficResult" class="traffic-result">Traffic simulation result will appear here.</div>
+        <div id="trafficFlow" class="traffic-flow" aria-live="polite">
+            <div class="flow-box">Source</div><div class="flow-arrow">→</div>
+            <div class="flow-box">Firewall Rules</div><div class="flow-arrow">→</div>
+            <div class="flow-box">Waiting for simulation</div>
+        </div>
+    </div>
+    <div class="panel">
+        <h2>Recent Traffic Logs</h2>
+        <div class="table-wrapper">
+            <table><thead><tr><th>Time</th><th>Source</th><th>Destination</th><th>Port</th><th>Protocol</th><th>Decision</th><th>Rule ID</th></tr></thead>
+            <tbody id="trafficLogs"><tr><td colspan="7">No traffic logs loaded.</td></tr></tbody></table>
+        </div>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

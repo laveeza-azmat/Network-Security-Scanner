@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan History</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div style="margin-bottom: 20px;">
+        <a href="/">Dashboard</a> |
+        <a href="/scanner">Network Scanner</a> |
+        <a href="/history">Scan History</a> |
+        <a href="/firewall">Firewall Simulator</a>
+    </div>
+
+    <h1>Scan History</h1>
+
+    <p>View previous network scans saved in the database.</p>
+    
+
+    <div class="panel">
+
+        <h2>Previous Scans</h2>
+
+        <button onclick="loadHistory()">Refresh History</button>
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Scan ID</th>
+                    <th>Target IP</th>
+                    <th>Scan Date</th>
+                        <th>Scan Type</th>
+                    <th>Open Ports</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody id="historyTable">
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <div class="panel">
+
+        <h2>Scan Details</h2>
+
+        <div id="historyDetails">
+            Select a scan to view its results.
+        </div>
+
+    </div>
+    
+
+</div>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+network_scanner.db
+instance/
+.env
+.DS_Store

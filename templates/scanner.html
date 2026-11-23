@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Scanner | NetGuard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="container">
+    <nav class="page-nav">
+        <a href="/">Dashboard</a> | <a href="/scanner">Network Scanner</a> |
+        <a href="/history">Scan History</a> | <a href="/firewall">Firewall Simulator</a>
+    </nav>
+    <h1>Network Scanner</h1>
+    <p>Scan localhost or private network hosts that you own or are authorized to test.</p>
+    <div class="panel">
+        <h2>Start Scan</h2>
+        <form id="scanForm">
+            <label for="target">Target IP Address or Hostname</label>
+            <input type="text" id="target" placeholder="192.168.1.1 or 127.0.0.1" required>
+            <label for="scanType">Scan Type</label>
+            <select id="scanType">
+                <option value="tcp">TCP Connect (fast common ports)</option>
+                <option value="udp">UDP Scan (fast common ports)</option>
+                <option value="full">Full TCP Connect (all TCP ports)</option>
+            </select>
+            <label for="customPorts">Custom Ports (optional)</label>
+            <input type="text" id="customPorts" placeholder="Example: 80,443,8000-8100">
+            <p class="muted">Leave ports empty to use the scan type's default. Full TCP scan checks all TCP ports and can take longer.</p>
+            <button type="submit" class="primary-btn">Start Scan</button>
+        </form>
+        <p id="scanMessage" class="message"></p>
+    </div>
+    <div class="panel">
+        <h2>Scan Results</h2>
+        <p id="scanSummary">No scan performed yet.</p>
+        <div class="table-wrapper">
+            <table>
+                <thead><tr><th>IP Address</th><th>Port</th><th>Service</th><th>Protocol</th><th>Status</th><th>Security Note</th></tr></thead>
+                <tbody id="scanResults"><tr><td colspan="6" class="empty">No results yet.</td></tr></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
