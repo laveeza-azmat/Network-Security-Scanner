@@ -1,4 +1,4 @@
-# NetGuard — Network Security Scanner & Firewall Visualizer
+#Network Security Scanner & Firewall Visualizer
 
 A Flask-based academic project for scanning authorized private-network hosts, viewing open ports and services, and simulating priority-based firewall rules.
 
